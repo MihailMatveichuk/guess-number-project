@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { View, TextInput, StyleSheet, Alert } from 'react-native';
-import { PrimaryButton } from '../components';
 
-export function StartGameScreen() {
+import { PrimaryButton } from '../components';
+import { COLORS } from '../constants';
+
+export function StartGameScreen({ onPickPageNumber }) {
   const [numberValue, setNumberValue] = useState('');
 
   const handleNumberChange = (enteredText) => {
@@ -27,6 +29,7 @@ export function StartGameScreen() {
       },
     ]);
     setNumberValue('');
+    onPickPageNumber(chosenNuber);
   };
 
   const resetNumber = () => {
@@ -61,7 +64,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 24,
     marginTop: 100,
     padding: 16,
-    backgroundColor: '#4e0329',
+    backgroundColor: COLORS.secondary,
     borderRadius: 8,
     elevation: 10,
     shadowColor: 'black',
@@ -75,9 +78,9 @@ const styles = StyleSheet.create({
     height: 50,
     width: 50,
     fontSize: 32,
-    borderBottomColor: '#ddb52f',
+    borderBottomColor: COLORS.primary,
     borderBottomWidth: 2,
-    color: '#ddb52f',
+    color: COLORS.primary,
     marginVertical: 8,
     textAlign: 'center',
     fontWeight: 'bold',
