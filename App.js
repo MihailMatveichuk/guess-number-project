@@ -1,21 +1,62 @@
 import { StyleSheet, ImageBackground, SafeAreaView } from 'react-native';
+import { useFonts } from 'expo-font';
 import { LinearGradient } from 'expo-linear-gradient';
-import { StartGameScreen } from './screens';
+import AppLoading from 'expo-app-loading';
+
+import { GameOverScreen, StartGameScreen } from './screens';
 import { GameScreen } from './screens';
 import { useState } from 'react';
 import { COLORS } from './constants';
 
 export default function App() {
   const [userNumber, setUserNumber] = useState(0);
+  const [gameOverScreen, setGameOverScreen] = useState(false);
+  const [countRound, setCountRound] = useState(0);
 
-  const handlestartPage = (pickedNumnberOfPage) => {
+  const [isFontsLoading] = useFonts({
+    'open-sans': require('./assets/fonts/OpenSans-Regular.ttf'),
+    'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf'),
+  });
+
+  if (!isFontsLoading) {
+    return <AppLoading />;
+  }
+
+  const handleStartPage = (pickedNumnberOfPage) => {
     setUserNumber(() => pickedNumnberOfPage);
   };
+  const handleGameOverPage = (numberOfRounds) => {
+    setGameOverScreen(true);
+    setCountRound(numberOfRounds);
+  };
 
-  let screen = <StartGameScreen onPickPageNumber={handlestartPage} />;
+  const handleStartNewGame = () => {
+    setCountRound(0);
+    setGameOverScreen(false);
+    setUserNumber(null);
+  };
+
+  let screen = <StartGameScreen onPickPageNumber={handleStartPage} />;
 
   if (userNumber) {
-    screen = <GameScreen userNumber={userNumber} />;
+    screen = (
+      <GameScreen
+        userNumber={userNumber}
+        isGameOver={handleGameOverPage}
+        setCountRound={setCountRound}
+        count={countRound}
+      />
+    );
+  }
+
+  if (gameOverScreen && userNumber) {
+    screen = (
+      <GameOverScreen
+        userNumber={userNumber}
+        countRound={countRound}
+        onStartNewGame={handleStartNewGame}
+      />
+    );
   }
 
   return (

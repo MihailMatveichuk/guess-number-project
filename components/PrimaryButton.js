@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     elevation: 8,
+    overflow: 'hidden',
   },
   butonText: {
     color: 'white',

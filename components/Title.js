@@ -9,15 +9,16 @@ export function Title({ children }) {
 
 const styles = StyleSheet.create({
   title: {
+    fontFamily: 'open-sans-bold',
     fontSize: 24,
-    fontWeight: 'bold',
     color: COLORS.primary,
-    borderColor: COLORS.primary,
+    borderColor: 'white',
     backgroundColor: COLORS.secondary,
     borderWidth: 2,
     borderRadius: 5,
-    width: '80%',
+    width: '90%',
     textAlign: 'center',
     paddingVertical: 10,
+    alignSelf: 'center',
   },
 });
