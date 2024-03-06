@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, StyleSheet } from 'react-native';
+import { Text, StyleSheet, Platform } from 'react-native';
 
 import { COLORS } from '../constants';
 
@@ -11,10 +11,13 @@ const styles = StyleSheet.create({
   title: {
     fontFamily: 'open-sans-bold',
     fontSize: 24,
-    color: COLORS.primary,
+    color: Platform.select({ android: COLORS.primary, ios: 'white' }),
     borderColor: 'white',
-    backgroundColor: COLORS.secondary,
-    borderWidth: 2,
+    backgroundColor: Platform.select({
+      android: COLORS.secondary,
+      ios: 'transparent',
+    }),
+    borderWidth: Platform.OS === 'android' ? 2 : 0,
     borderRadius: 5,
     width: '80%',
     textAlign: 'center',

@@ -9,7 +9,7 @@ const { width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   inputContainer: {
-    width: width < 380 ? '90%' : '80%',
+    width: width < 380 ? '100%' : '90%',
     padding: width < 380 ? 20 : 30,
     backgroundColor: COLORS.secondary,
     borderRadius: 8,

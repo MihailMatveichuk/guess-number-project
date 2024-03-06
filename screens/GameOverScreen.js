@@ -21,7 +21,11 @@ export function GameOverScreen({ userNumber, countRound, onStartNewGame }) {
       <View
         style={[
           styles.backgroundImage,
-          { height: demansionImageBackground, width: demansionImageBackground },
+          {
+            height: demansionImageBackground,
+            width: demansionImageBackground,
+            borderRadius: demansionImageBackground / 2,
+          },
         ]}
       >
         <Image
