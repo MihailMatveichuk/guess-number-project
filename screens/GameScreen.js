@@ -1,5 +1,11 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { View, Text, StyleSheet, FlatList } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  useWindowDimensions,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 
 import { Title, PrimaryButton, LogContainer } from '../components';
@@ -20,7 +26,8 @@ export function GameScreen({ userNumber, isGameOver, setCountRound, count }) {
   );
 
   const [currentGuess, setCurrentGuess] = useState(possibleNumber);
-  const [userChoices, setUserChoices] = useState([currentGuess]);
+  const [userChoices, setUserChoices] = useState([]);
+  const { height } = useWindowDimensions();
 
   useEffect(() => {
     if (currentGuess === userNumber) {
@@ -49,9 +56,10 @@ export function GameScreen({ userNumber, isGameOver, setCountRound, count }) {
   };
 
   const listLength = userChoices.length;
+  const marginContainer = height < 380 ? 20 : 30;
 
   return (
-    <View style={styles.pageContainer}>
+    <View style={[styles.pageContainer, { margin: marginContainer }]}>
       <Title>Opponent's Guess</Title>
       <Text style={styles.number}>{currentGuess}</Text>
       <View style={styles.mainContent}>
@@ -89,7 +97,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     gap: 10,
-    marginTop: '50%',
   },
   number: {
     fontSize: 40,
@@ -112,6 +119,6 @@ const styles = StyleSheet.create({
   },
   listContainer: {
     flex: 1,
-    marginBottom: '50%',
+    marginBottom: 100,
   },
 });

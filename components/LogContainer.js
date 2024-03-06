@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import { COLORS } from '../constants';
 
 export function LogContainer({ item, index }) {
@@ -11,9 +11,11 @@ export function LogContainer({ item, index }) {
   );
 }
 
+const { width } = Dimensions.get('window');
+
 const styles = StyleSheet.create({
   logNumberContainer: {
-    width: '90%',
+    width: width < 380 ? '90%' : '80%',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',

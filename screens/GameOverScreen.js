@@ -1,13 +1,29 @@
 import React from 'react';
-import { View, StyleSheet, Image, Text } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Image,
+  Text,
+  useWindowDimensions,
+} from 'react-native';
 import { PrimaryButton, Title } from '../components';
 import { COLORS } from '../constants';
 
 export function GameOverScreen({ userNumber, countRound, onStartNewGame }) {
+  const { height, width } = useWindowDimensions();
+
+  const demansionImageBackground = width < 380 || height < 400 ? 150 : 300;
+  const marginTop = height < 400 ? 10 : 100;
+
   return (
     <View style={styles.container}>
       <Title>GAME OVER!</Title>
-      <View style={styles.backgroundImage}>
+      <View
+        style={[
+          styles.backgroundImage,
+          { height: demansionImageBackground, width: demansionImageBackground },
+        ]}
+      >
         <Image
           style={styles.image}
           source={require('../assets/images/success.png')}
@@ -18,7 +34,7 @@ export function GameOverScreen({ userNumber, countRound, onStartNewGame }) {
         rounds to guess number{' '}
         <Text style={styles.highlightText}>{userNumber}</Text>
       </Text>
-      <View style={styles.buttonsContainer}>
+      <View style={{ marginTop }}>
         <PrimaryButton onPress={onStartNewGame}>START NEW GAME</PrimaryButton>
       </View>
     </View>
@@ -33,8 +49,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   backgroundImage: {
-    width: 300,
-    height: 300,
     borderRadius: 150,
     borderWidth: 3,
     borderColor: COLORS.secondary,
@@ -56,8 +70,5 @@ const styles = StyleSheet.create({
     fontFamily: 'open-sans-bold',
     color: 'white',
     fontSize: 25,
-  },
-  buttonsContainer: {
-    marginTop: 50,
   },
 });

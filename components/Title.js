@@ -16,9 +16,10 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.secondary,
     borderWidth: 2,
     borderRadius: 5,
-    width: '90%',
+    width: '80%',
     textAlign: 'center',
     paddingVertical: 10,
     alignSelf: 'center',
+    maxWidth: '80%',
   },
 });
